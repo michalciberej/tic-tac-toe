@@ -1,10 +1,98 @@
-// ! create Ui that shows 9 divs as a box display player names and in the end of the game display who won, create resetGame button 
-// ? add function to swap playermode if player1 has more tiles then player2 and the oter way 
-// * give every boardgame element exact position in the array. Start with array of 0-8. reasign exact element's value to chosen symbol onclick 
-// ! add function that checks for a pattern of symbols in the array e.g. arr[0,3,6] (I know that doesnt work but it's good for me to visualize) === "X" means win. Also is a vertical line on the left side of the board etc. 
-// ? array.lenght == 8 && all other pattern checking functions return false - display draw. display the resetGame button 
-// * add factory function that creates objects of player with name, X/O symbol 
-// ! add module for functions that checks for a patterns of symbols in array. 
-// ? create resetGame() that resets symbols in the array to 0-8, keep names of players and resets dom
+const cellZero = document.querySelector("#cellZero")
+const cellOne = document.querySelector("#cellOne")
+const cellTwo = document.querySelector("#cellTwo")
+const cellThree = document.querySelector("#cellThree")
+const cellFour = document.querySelector("#cellFour")
+const cellFive = document.querySelector("#cellFive")
+const cellSix = document.querySelector("#cellSix")
+const cellSeven = document.querySelector("#cellSeven")
+const cellEight = document.querySelector("#cellEight")
 
-const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+const gameboard = {
+    gameboardCells: [cellZero, cellOne, cellTwo, cellThree, cellFour, cellFive, cellSix, cellSeven, cellEight],
+    gameboardValues: ["","","","","","","","",""],
+    turn: 0,
+}
+
+const ControlGameboard = (() => {
+
+    const updateGameboard = () => {
+        for ( let i = 0; i < gameboard.gameboardCells.length; i++) {
+            gameboard.gameboardCells[i].textContent = gameboard.gameboardValues[i]
+        }
+    }
+
+    const checkForSymbol = () => {
+        if (gameboard.turn % 2 === 0) {
+            gameboard.turn++
+            return "X"
+        }   else {
+            gameboard.turn++
+            return "O"
+        }
+    }
+
+    const insertInputIntoArrayOfValues = (index, symbol) => {
+        if (gameboard.gameboardValues[index] === "") {
+            gameboard.gameboardValues[index] = symbol
+    }
+        updateGameboard()
+        checkForWinner()
+        checkForTie()
+    }
+
+    const checkForWinner = () => {
+        if (gameboard.gameboardValues[0] === "X" && gameboard.gameboardValues[3] === "X" && gameboard.gameboardValues[6] === "X") {
+            //playerOne wins! display resetButton
+    }   else if (gameboard.gameboardValues[1] === "X" && gameboard.gameboardValues[4] === "X" && gameboard.gameboardValues[7] === "X") {
+            //playerOne wins! display resetButton
+    }   else if (gameboard.gameboardValues[2] === "X" && gameboard.gameboardValues[5] === "X" && gameboard.gameboardValues[8] === "X") {
+            //playerOne wins! display resetButton
+    }   else if (gameboard.gameboardValues[0] === "X" && gameboard.gameboardValues[1] === "X" && gameboard.gameboardValues[2] === "X") {
+            console.log("retard")
+    }   else if (gameboard.gameboardValues[3] === "X" && gameboard.gameboardValues[4] === "X" && gameboard.gameboardValues[5] === "X") {
+        //playerOne wins! display resetButton
+    }   else if (gameboard.gameboardValues[6] === "X" && gameboard.gameboardValues[7] === "X" && gameboard.gameboardValues[8] === "X") {
+        //playerOne wins! display resetButton
+    }   else if (gameboard.gameboardValues[0] === "X" && gameboard.gameboardValues[4] === "X" && gameboard.gameboardValues[8] === "X") {
+        //playerOne wins! display resetButton
+    }   else if (gameboard.gameboardValues[2] === "X" && gameboard.gameboardValues[4] === "X" && gameboard.gameboardValues[6] === "X") {
+        //playerOne wins! display resetButton
+    }   else if (gameboard.gameboardValues[1] === "O" && gameboard.gameboardValues[4] === "O" && gameboard.gameboardValues[7] === "O") {
+            //playerTwo wins! display resetButton
+    }   else if (gameboard.gameboardValues[2] === "O" && gameboard.gameboardValues[5] === "O" && gameboard.gameboardValues[8] === "O") {
+            //playerTwo wins! display resetButton
+    }   else if (gameboard.gameboardValues[0] === "O" && gameboard.gameboardValues[1] === "O" && gameboard.gameboardValues[2] === "O") {
+            //playerTwo wins! display resetButton
+    }   else if (gameboard.gameboardValues[3] === "O" && gameboard.gameboardValues[4] === "O" && gameboard.gameboardValues[5] === "O") {
+            //playerTwo wins! display resetButton
+    }   else if (gameboard.gameboardValues[6] === "O" && gameboard.gameboardValues[7] === "O" && gameboard.gameboardValues[8] === "O") {
+            //playerTwo wins! display resetButton
+    }   else if (gameboard.gameboardValues[0] === "O" && gameboard.gameboardValues[4] === "O" && gameboard.gameboardValues[8] === "O") {
+            //playerTwo wins! display resetButton
+    }   else if (gameboard.gameboardValues[2] === "O" && gameboard.gameboardValues[4] === "O" && gameboard.gameboardValues[6] === "O") {
+            //playerTwo wins! display resetButton
+    }   else if (gameboard.gameboardValues[0] === "O" && gameboard.gameboardValues[3] === "O" && gameboard.gameboardValues[6] === "O") {
+            //playerTwo wins! display resetButton
+    }   
+}
+
+    
+
+    return {
+        insertInputIntoArrayOfValues,
+        checkForSymbol,
+    }
+
+})()
+
+
+gameboard.gameboardCells[0].addEventListener("click", () => ControlGameboard.insertInputIntoArrayOfValues(0, ControlGameboard.checkForSymbol()))
+gameboard.gameboardCells[1].addEventListener("click", () => ControlGameboard.insertInputIntoArrayOfValues(1, ControlGameboard.checkForSymbol()))
+gameboard.gameboardCells[2].addEventListener("click", () => ControlGameboard.insertInputIntoArrayOfValues(2, ControlGameboard.checkForSymbol()))
+gameboard.gameboardCells[3].addEventListener("click", () => ControlGameboard.insertInputIntoArrayOfValues(3, ControlGameboard.checkForSymbol()))
+gameboard.gameboardCells[4].addEventListener("click", () => ControlGameboard.insertInputIntoArrayOfValues(4, ControlGameboard.checkForSymbol()))
+gameboard.gameboardCells[5].addEventListener("click", () => ControlGameboard.insertInputIntoArrayOfValues(5, ControlGameboard.checkForSymbol()))
+gameboard.gameboardCells[6].addEventListener("click", () => ControlGameboard.insertInputIntoArrayOfValues(6, ControlGameboard.checkForSymbol()))
+gameboard.gameboardCells[7].addEventListener("click", () => ControlGameboard.insertInputIntoArrayOfValues(7, ControlGameboard.checkForSymbol()))
+gameboard.gameboardCells[8].addEventListener("click", () => ControlGameboard.insertInputIntoArrayOfValues(8, ControlGameboard.checkForSymbol()))
