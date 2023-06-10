@@ -36,11 +36,18 @@ const ControlGameboard = (() => {
         }
     }
 
+    const makeCellsNotScale = (index) => {
+        if (gameboard.gameboardCells[index].textContent === "X" || gameboard.gameboardCells[index].textContent === "O"){
+            gameboard.gameboardCells[index].classList.remove("gameCellActive")
+        }
+    }
+
     const insertInputIntoArrayOfValues = (index, symbol) => {
         if (gameboard.gameboardValues[index] === "") {
             gameboard.gameboardValues[index] = symbol
     }
         updateGameboard()
+        makeCellsNotScale(index)
         checkForWinner()
         checkForTie()
     }
